@@ -17,11 +17,15 @@ class Timer {
     this.durationInput.addEventListener("click", this.inputChanged);
   }
 
+  playIcon = () => {
+    play.classList.replace("fa-pause", "fa-play");
+    play.setAttribute("title", "Play");
+  };
+
   start = () => {
     if (play.classList.contains("fa-pause")) {
       this.pause();
-      play.classList.replace("fa-pause", "fa-play");
-      play.setAttribute("title", "Play");
+      this.playIcon();
       this.running = false;
     } else if (!this.running) {
       play.classList.replace("fa-play", "fa-pause");
@@ -37,9 +41,8 @@ class Timer {
 
   reset = () => {
     clearInterval(this.interval);
-    this.durationInput.value = "30";
-    play.classList.replace("fa-pause", "fa-play");
-    play.setAttribute("title", "Play");
+    this.durationInput.value = "30:00";
+    this.playIcon();
     if (this.running || !this.running) {
       circle.setAttribute("stroke-dashoffset", 0);
       this.running = false;
@@ -52,8 +55,7 @@ class Timer {
 
   inputChanged = () => {
     this.pause();
-    play.classList.replace("fa-pause", "fa-play");
-    play.setAttribute("title", "Play");
+    this.playIcon();
     this.running = false;
   };
 
